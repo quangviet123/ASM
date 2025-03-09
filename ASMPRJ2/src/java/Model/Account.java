@@ -55,6 +55,11 @@ public class Account {
     public void setEmployeeId(int EmployeeId) {
         this.EmployeeId = EmployeeId;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" + "Id=" + Id + ", Username=" + Username + ", Password=" + Password + ", EmployeeId=" + EmployeeId + '}';
+    }
     
     
 }

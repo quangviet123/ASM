@@ -87,6 +87,11 @@ public class Employee {
     public void setRoleId(int RoleId) {
         this.RoleId = RoleId;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "Id=" + Id + ", Name=" + Name + ", Dob=" + Dob + ", Email=" + Email + ", Phone=" + Phone + ", Division=" + Division + ", RoleId=" + RoleId + '}';
+    }
     
     
 }
