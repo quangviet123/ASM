@@ -26,7 +26,6 @@ public class DBContext {
         } catch (SQLException ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
     public static void main(String[] args) {
         String user = "viet123";
