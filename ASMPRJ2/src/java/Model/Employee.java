@@ -16,20 +16,18 @@ public class Employee {
     private Date Dob;
     private String Email;
     private String Phone;
-    private int Division;
-    private int RoleId;
+    private int Parentemployee;
 
     public Employee() {
     }
 
-    public Employee(int Id, String Name, Date Dob, String Email, String Phone, int Division, int RoleId) {
+    public Employee(int Id, String Name, Date Dob, String Email, String Phone, int Parentemployee) {
         this.Id = Id;
         this.Name = Name;
         this.Dob = Dob;
         this.Email = Email;
         this.Phone = Phone;
-        this.Division = Division;
-        this.RoleId = RoleId;
+        this.Parentemployee = Parentemployee;
     }
 
     public int getId() {
@@ -72,26 +70,14 @@ public class Employee {
         this.Phone = Phone;
     }
 
-    public int getDivision() {
-        return Division;
+    public int getParentemployee() {
+        return Parentemployee;
     }
 
-    public void setDivision(int Division) {
-        this.Division = Division;
+    public void setParentemployee(int Parentemployee) {
+        this.Parentemployee = Parentemployee;
     }
 
-    public int getRoleId() {
-        return RoleId;
-    }
 
-    public void setRoleId(int RoleId) {
-        this.RoleId = RoleId;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" + "Id=" + Id + ", Name=" + Name + ", Dob=" + Dob + ", Email=" + Email + ", Phone=" + Phone + ", Division=" + Division + ", RoleId=" + RoleId + '}';
-    }
-    
-    
+   
 }
