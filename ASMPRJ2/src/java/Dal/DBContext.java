@@ -13,7 +13,7 @@ public class DBContext {
     public Connection connection;
     public DBContext() {
         
-        String url = "jdbc:sqlserver://MSI\\SQLEXPRESS:1433;databaseName=EmployeeManagement;encrypt=false";
+        String url = "jdbc:sqlserver://MSI\\SQLEXPRESS:1433;databaseName=EmManagement;encrypt=false";
         String username = "viet123";
         String password = "1234";
         try {
@@ -30,7 +30,7 @@ public class DBContext {
     public static void main(String[] args) {
         String user = "viet123";
         String pass = "1234";
-        String url = "jdbc:sqlserver://MSI\\SQLEXPRESS:1433;databaseName=EmployeeManagement;trustServerCertificate=true;";
+        String url = "jdbc:sqlserver://MSI\\SQLEXPRESS:1433;databaseName=EmManagement;trustServerCertificate=true;";
 
         try (Connection co = DriverManager.getConnection(url, user, pass)) {
             System.out.println("finish connection data base");
