@@ -5,12 +5,17 @@
 
 package Controller;
 
+import Dal.AccountDAO;
+import Dal.DBContext;
+import Model.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.*;
 
 /**
  *
@@ -66,18 +71,22 @@ public class LoginControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String e = request.getParameter("email");
+        response.setContentType("text/html;charset=UTF-8");
+        String u = request.getParameter("username");
         String p = request.getParameter("password");
         
-        String E = "viet123";
-        String P = "1234";
+         
+            AccountDAO accountDAO = new AccountDAO();
+            Account acc = accountDAO.validateUser(u, p);
+            
+            if (acc == null) {
+                 response.sendRedirect("Login.jsp?error=1");
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("account", acc);
+                response.sendRedirect("Employee.jsp");
+            }
         
-        if (e.equals(E) && p.equals(P)) {
-            response.getWriter().println("Login succes ");
-//                response.sendRedirect("Employee.jsp");
-        } else {
-            response.sendRedirect("Login.jsp?error=1");
-        }
     }
     
 
