@@ -63,6 +63,7 @@
             <th>Created By</th>
             <th>Status</th>
             <th>Processed By</th>
+            <th>Update</th>
         </tr>
         
         <tr>

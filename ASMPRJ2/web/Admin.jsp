@@ -21,6 +21,26 @@
             height: 100vh;
             margin: 0;
         }
+        .logout-button {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                background-color: #ff7043;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 20px;
+                cursor: pointer;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease-in-out;
+            }
+            
+            .logout-button:hover {
+                background-color: #e64a19;
+                transform: scale(1.05);
+            }
 
         .container {
             text-align: center;
@@ -65,6 +85,7 @@
         }
     </style>
     <body>
+        <button class="logout-button" onclick="window.location.href='Login.jsp'">Logout</button>
         <div class="container">
         <button class="custom-button" onclick="window.location.href='Accept.jsp'">
             <span>
