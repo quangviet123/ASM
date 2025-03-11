@@ -29,8 +29,7 @@ public class EmployeeDAO extends DBContext{
                 e.setDob(rs.getDate(3));
                 e.setEmail(rs.getString(4));
                 e.setPhone(rs.getString(5));
-                e.setDivision(rs.getInt(6));
-                e.setRoleId(rs.getInt(7));
+                e.setParentemployee(rs.getInt(6));
                 list.add(e);
             }
         } catch (Exception e) {
