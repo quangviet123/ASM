@@ -85,7 +85,7 @@
         }
     </style>
     <body>
-        <button class="logout-button" onclick="window.location.href='Login.jsp'">Logout</button>
+        <button class="logout-button" onclick="window.location.href='http://localhost:8080/ASMPRJ2/logout'">Logout</button>
         <div class="container">
         <button class="custom-button" onclick="window.location.href='Form.jsp'">
             <span>
