@@ -4,8 +4,32 @@
         <servlet-name>LoginControll</servlet-name>
         <servlet-class>Controller.LoginControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>homeController</servlet-name>
+        <servlet-class>Controller.homeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>Controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RequestController</servlet-name>
+        <servlet-class>Controller.RequestController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControll</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>homeController</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequestController</servlet-name>
+        <url-pattern>/Request</url-pattern>
     </servlet-mapping>
 </web-app>
