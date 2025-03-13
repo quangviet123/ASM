@@ -54,17 +54,11 @@ public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession s = request.getSession(false); // Không tạo session nếu chưa có
-    if (s != null) {
-        System.out.println("Session trước khi hủy: " + s.getId());
+        HttpSession s=request.getSession();
+//        s.setAttribute("account",null);
         s.invalidate();
-        System.out.println("Session đã bị hủy!");
-    } else {
-        System.out.println("Không có session để hủy!");
-    }
-
-    request.getRequestDispatcher("Login.jsp").forward(request, response);
-}
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
