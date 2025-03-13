@@ -86,9 +86,7 @@
     <body>
         <div class="form-container">
         <h2>Đơn xin nghỉ phép</h2>
-        <p><strong>User:</strong> <%= request.getAttribute("nguoiDuyet") %>, <strong>Role:</strong> <%= request.getAttribute("nguoiDuyet") %>, <strong>Dep:</strong> <%= request.getAttribute("nguoiDuyet") %></p>
-        
-        <form action="submit-don.jsp" method="post">
+        <form action="Request" method="post">
             <label for="from-date">Từ ngày:</label>
             <input type="date" id="from-date" name="fromDate" required>
 
@@ -100,6 +98,15 @@
 
             <button type="submit" class="submit-btn">Gửi</button>
         </form>
+        <c:if test="${not empty error}">
+    <div style="color: red; margin-bottom: 10px;">
+        <ul>
+            <c:forEach var="error" items="${error}">
+                <li>${error}</li>
+            </c:forEach>
+        </ul>
+    </div>
+</c:if>
     </div>
     </body>
 </html>
