@@ -92,12 +92,11 @@
                 <span class="icon">✨</span> Tạo Đơn Xin Nghỉ Phép <span>➝</span>
             </span>
         </button>
-        <button class="custom-button" onclick="window.location.href='View.jsp'">
+        <button class="custom-button" onclick="window.location.href='http://localhost:8080/ASMPRJ2/View'">
             <span>
                 <span class="icon">✨</span> Xem Đơn <span>➝</span>
             </span>
         </button>
     </div>
-        <p>${account.getEmployeeId()}</p>
     </body>
 </html>
