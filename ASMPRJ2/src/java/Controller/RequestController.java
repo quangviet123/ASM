@@ -18,6 +18,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
 
 /**
  *
@@ -47,7 +48,51 @@ public class RequestController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         HttpSession session = request.getSession();
+    Account account = (Account) session.getAttribute("account");
+    if (account == null) {
+        response.sendRedirect("login");
+        return;
     }
+
+    String action = request.getParameter("action");
+    // Nếu action=edit, nghĩa là muốn sửa
+    if ("edit".equals(action)) {
+        // Lấy id
+        String idRaw = request.getParameter("id");
+        if (idRaw == null) {
+            // Không có id => Quay về trang danh sách
+            response.sendRedirect("home");
+            return;
+        }
+        int id = Integer.parseInt(idRaw);
+
+        // Lấy thông tin request từ DB
+        RequestDAO requestDAO = new RequestDAO();
+       List<Request> req = requestDAO.getReuestbyId(4);  // Viết hàm này trong DAO
+
+        if (req == null) {
+            // Không tìm thấy => Quay về trang danh sách
+            response.sendRedirect("home");
+            return;
+        }
+
+        // Đưa request này lên JSP để hiển thị form
+        request.setAttribute("editData", req);
+        request.setAttribute("isEdit", true); 
+        // isEdit=true để JSP biết đang sửa (chứ không phải tạo mới)
+
+        // Forward về Form.jsp
+        request.getRequestDispatcher("Form.jsp").forward(request, response);
+        return;
+    }
+
+    // Mặc định nếu không có action=edit, coi như hiển thị form rỗng (tạo mới)
+    // set isEdit = false => JSP biết hiển thị form tạo mới
+    request.setAttribute("isEdit", false);
+    request.getRequestDispatcher("Form.jsp").forward(request, response);
+}
+    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -72,24 +117,31 @@ public class RequestController extends HttpServlet {
 
         if (datefrom.after(dateto)) {
             error.add("Ngày bắt đầu nghỉ không thể sau ngày kết thúc nghỉ.");
+            
         }
         if (dateto.before(now)) {
             error.add("Ngày kết thúc nghỉ không thể là quá khứ.");
+            
         }
         if (datefrom.before(now)) {
             error.add("Ngày bắt đầu nghỉ không thể là quá khứ.");
+            
         }
         if (dateto.before(datefrom)) {
             error.add("Ngày kết thúc nghỉ không thể trước ngày bắt đầu nghỉ.");
+            
         }
         if (!error.isEmpty()) {
             request.setAttribute("error", error);
             request.getRequestDispatcher("Form.jsp").forward(request, response);
-        }
-        RequestDAO requestdao = new RequestDAO();
+            
+        }else{
+            RequestDAO requestdao = new RequestDAO();
         Request re = new Request(0, account.getEmployeeId(), dateto, datefrom, now, Reaason, "Pending");
         requestdao.insert(re);
         response.sendRedirect("home");
+        }
+       
     }
 
     @Override
