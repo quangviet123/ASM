@@ -14,14 +14,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e6f7f7; 
+            background-color: #e6f7f7;
             text-align: center;
         }
         table {
             width: 80%;
             margin: 20px auto;
             border-collapse: collapse;
-            border: 2px solid #6a0dad; 
+            border: 2px solid #6a0dad;
             border-radius: 8px;
             overflow: hidden;
             background: white;
@@ -55,8 +55,8 @@
     <body>
         <h2>Danh sách đơn nghỉ phép</h2>
 
-    <table>
-        <tr>
+        <table>
+            <thead>
             <th>Title</th>
             <th>From</th>
             <th>To</th>
@@ -64,36 +64,46 @@
             <th>Status</th>
             <th>Processed By</th>
             <th>Update</th>
-        </tr>
-        
-        <tr>
-            <td><a href="#">Xin nghỉ cưới...</a></td>
-            <td>1/1/2025</td>
-            <td>3/1/2025</td>
-            <td>Mr F</td>
-            <td class="status-inprogress">Inprogress</td>
-            <td></td>
-        </tr>
-        
-        <tr>
-            <td><a href="#">Xin nghỉ đi chơi</a></td>
-            <td>1/1/2025</td>
-            <td>5/1/2025</td>
-            <td>Mr E</td>
-            <td class="status-rejected">Rejected</td>
-            <td>Mr B</td>
-        </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="request" items="${requests}">
+                <tr>
+                    <td>
+                <c:choose>
+                    <c:when test="${request.getStatus() eq 'Pending'}">
+                        <a href="detail?id=${request.getId()}">
+                            ${request.getReaason()} 
+                        </a> 
+                    </c:when>
+                    <c:otherwise>
+                        ${request.getReaason()}
+                    </c:otherwise>
+                </c:choose>
+            </td>
+                    <!-- Title hiển thị theo reason -->
+                    <td>${request.getDateFrom()}</td>
+                    <td>${request.getDateTo()}</td>
+                    <td>${request.getDateCreate()}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${request.getStatus() eq 'Pending'}">
+                                <span class="status-inprogress">Pending</span>
+                            </c:when>
+                            <c:when test="${request.getStatus() eq 'Rejected'}">
+                                <span class="status-rejected">Rejected</span>
+                            </c:when>
+                            <c:otherwise>
+                                ${request.getStatus()}
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td></td>
 
-        <tr>
-            <td>...</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+                </tr>
+            </c:forEach>
+        </tbody>
+
 
     </table>
-
-    </body>
+</body>
 </html>
