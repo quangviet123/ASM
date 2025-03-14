@@ -10,6 +10,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
 
 /**
  *
@@ -151,10 +152,27 @@ public class RequestDAO extends DBContext {
         }
         return list;
     }
+    public int  updateRequest(Request r) {
+        int result = -1;
+        String sql = "UPDATE Request SET dateTo = ?, dateFrom = ?, dateCreate = ?, reaason = ?, status = ? WHERE id = ?";
+     try (PreparedStatement st = db.connection.prepareStatement(sql)) {
+            st.setDate(1, r.getDateTo());
+            st.setDate(2, r.getDateFrom());
+            st.setDate(3, r.getDateCreate());
+            st.setString(4, r.getReaason());
+            st.setString(5, r.getStatus()); // Nếu đổi tên thuộc tính, thì đây thành getReason()
+            st.setInt(6, r.getId());
+            result = st.executeUpdate();
+        } catch (SQLException ex) {
+            // Log lỗi để tiện debug
+            ex.printStackTrace();
+        }
+        return result;
+    }
 
     public List<RequestDTO> getRequestbyEmployeeId() {
         List<RequestDTO> list = new ArrayList<>();
-        String sql = "select r.Id,r.DateCreate,r.DateFrom,r.DateTo,r.Reason,r.Status from Request r where r.EmployeeId=3";
+        String sql = "select r.Id,r.DateCreate,r.DateFrom,r.DateTo,r.Reason,r.Status from Request r where r.EmployeeId=?";
         try {
             PreparedStatement st = db.connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -168,37 +186,62 @@ public class RequestDAO extends DBContext {
                 r.setStatus(rs.getString(6));
                 r.seteId(rs.getInt(7));
                 r.seteName(rs.getString(8));
-
                 list.add(r);
             }
         } catch (SQLException ex) {
         }
         return list;
     }
- public static void main(String[] args) {
-        // Khởi tạo DAO
-        RequestDAO dao = new RequestDAO();
-        
-        // Tạo một Request mới
-        Request request = new Request();
-        request.setId(999); // Id tự đặt (nếu DB không tự sinh)
-        request.setEmployeeId(4); // Giả sử employeeId là 123
-        // Giả sử ngày bắt đầu nghỉ và ngày kết thúc nghỉ
-        request.setDateFrom(Date.valueOf("2025-03-14"));
-        request.setDateTo(Date.valueOf("2025-03-16"));
-        // Ngày tạo request (có thể lấy ngày hiện tại)
-        request.setDateCreate(Date.valueOf(LocalDate.now()));
-        request.setReaason("Nghỉ phép để về quê");
-        request.setStatus("Pending"); // Tùy ý
-//        
-        // Gọi hàm insert
-        int result = dao.insert(request);
-        
-        // Kiểm tra kết quả
-        if (result > 0) {
-            System.out.println("Insert thành công!");
-        } else {
-            System.out.println("Insert thất bại!");
+
+    
+    public List<Request> getRequestbyEmployeeId(int employeeId) {
+        List<Request> list = new ArrayList<>();
+        String sql = "select r.Id,r.DateCreate,r.DateFrom,r.DateTo,r.Reason,r.Status from Request r where r.EmployeeId=?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, employeeId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Request r = new Request();
+                r.setId(rs.getInt("Id"));
+                r.setDateTo(rs.getDate("DateTo"));
+                r.setDateFrom(rs.getDate("DateFrom"));
+                r.setDateCreate(rs.getDate("DateCreate"));
+                r.setReaason(rs.getString("Reason"));
+                r.setStatus(rs.getString("Status"));
+                list.add(r);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }return list;
+    }
+
+    public List<Request> getReuestbyId(int Id) {
+        List<Request> list = new ArrayList<>();
+        String sql = "select r.Id,r.DateCreate,r.DateFrom,r.DateTo,r.Reason,r.Status from Request r where r.EmployeeId=?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, Id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Request r = new Request();
+                r.setId(rs.getInt("Id"));
+                r.setDateTo(rs.getDate("DateTo"));
+                r.setDateFrom(rs.getDate("DateFrom"));
+                r.setDateCreate(rs.getDate("DateCreate"));
+                r.setReaason(rs.getString("Reason"));
+                r.setStatus(rs.getString("Status"));
+                list.add(r);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }return list;
+    }
+    public static void main(String[] args) {
+        RequestDAO requestDAO=new RequestDAO();
+        List<Request> list=requestDAO.getReuestbyId(4);
+        for (Request request : list) {
+            System.out.println(request.toString());
         }
+            
+    
     }
 }
