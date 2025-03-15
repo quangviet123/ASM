@@ -102,12 +102,13 @@ public class RequestDAO extends DBContext {
         return result;
     }
 
-    public List<RequestDTO> getRequestbyManagerID() {
+    public List<RequestDTO> getRequestbyManagerID(int managementId) {
         List<RequestDTO> list = new ArrayList<>();
-        String sql = "select r.Id,r.DateCreate,r.DateFrom,r.DateTo,r.Reason,r.Status,e.Id,e.Name from Request r inner join Employee  e on r.EmployeeId = e.Id where e.Parentemployee =2";
+        String sql = "select r.Id,r.DateCreate,r.DateFrom,r.DateTo,r.Reason,r.Status,e.Id,e.Name from Request r inner join Employee  e on r.EmployeeId = e.Id where e.Parentemployee =?";
         try {
 
             PreparedStatement st = db.connection.prepareStatement(sql);
+            st.setInt(1, managementId);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 RequestDTO r = new RequestDTO();
@@ -125,6 +126,15 @@ public class RequestDAO extends DBContext {
         } catch (SQLException ex) {
         }
         return list;
+    }
+    public static void main(String[] args) {
+        RequestDAO requestDAO=new RequestDAO();
+        List<RequestDTO> list=requestDAO.getRequestbyManagerID(2);
+        for (RequestDTO request : list) {
+            System.out.println(request.toString());
+        }
+            
+    
     }
 
     public List<RequestDTO> UpdateStatusRequest(String Status, int EmployeeId) {
@@ -170,7 +180,7 @@ public class RequestDAO extends DBContext {
         return result;
     }
 
-    public List<RequestDTO> getRequestbyEmployeeId() {
+    public List<RequestDTO> getequestbyEmployeeId() {
         List<RequestDTO> list = new ArrayList<>();
         String sql = "select r.Id,r.DateCreate,r.DateFrom,r.DateTo,r.Reason,r.Status from Request r where r.EmployeeId=?";
         try {
@@ -235,13 +245,5 @@ public class RequestDAO extends DBContext {
             e.printStackTrace();
         }return list;
     }
-    public static void main(String[] args) {
-        RequestDAO requestDAO=new RequestDAO();
-        List<Request> list=requestDAO.getReuestbyId(4);
-        for (Request request : list) {
-            System.out.println(request.toString());
-        }
-            
-    
-    }
+   
 }

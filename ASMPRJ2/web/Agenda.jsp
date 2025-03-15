@@ -17,6 +17,24 @@
             font-family: Arial, sans-serif;
             text-align: center;
         }
+        .btn-back {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background-color: #3b6cc2; /* Màu xanh dương cho đồng bộ với submit-btn */
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 5px;
+                cursor: pointer;
+                box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+                transition: background-color 0.3s ease;
+            }
+            .btn-back:hover {
+                background-color: #2a5298;
+            }
         table {
             border-collapse: collapse;
             width: 60%;
@@ -50,6 +68,9 @@
         }
     </style>
     <body>
+        <button class="btn-back" onclick="window.history.back();">
+            Quay lại
+        </button>
          <h2>Lịch làm việc</h2>
 
     <!-- Bộ lọc ngày -->

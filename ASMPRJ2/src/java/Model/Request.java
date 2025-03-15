@@ -85,6 +85,11 @@ public class Request {
     public void setStatus(String Status) {
         this.Status = Status;
     }
+
+    @Override
+    public String toString() {
+        return "Request{" + "Id=" + Id + ", EmployeeId=" + EmployeeId + ", DateTo=" + DateTo + ", DateFrom=" + DateFrom + ", DateCreate=" + DateCreate + ", Reaason=" + Reaason + ", Status=" + Status + '}';
+    }
     
     
 }
