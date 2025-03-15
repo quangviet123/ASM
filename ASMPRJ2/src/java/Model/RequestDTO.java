@@ -97,6 +97,11 @@ public class RequestDTO {
     public void seteName(String eName) {
         this.eName = eName;
     }
+
+    @Override
+    public String toString() {
+        return "RequestDTO{" + "Id=" + Id + ", DateCreate=" + DateCreate + ", DateFrom=" + DateFrom + ", DateTo=" + DateTo + ", Reason=" + Reason + ", Status=" + Status + ", eId=" + eId + ", eName=" + eName + '}';
+    }
     
     
     
