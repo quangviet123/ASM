@@ -123,7 +123,7 @@
     <div style="color: red; margin-bottom: 10px;">
         <ul>
             <c:forEach var="error" items="${error}">
-                <li>${error}</li>
+                <li>${error}</li>   
             </c:forEach>
         </ul>
     </div>
