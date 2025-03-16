@@ -85,7 +85,7 @@
                 <p style="color: red; text-align: center; font-size: 14px;">Không tìm thấy đơn nghỉ phép.</p>
             </c:if>
             <div class="back-link">
-                <a href="home">Quay lại</a>
+                <a href="View">Quay lại</a>
             </div>
         </div>
     </body>
