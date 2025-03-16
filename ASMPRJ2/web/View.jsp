@@ -71,7 +71,8 @@
         }
     </style>
     <body>
-        <button class="btn-back" onclick="window.history.back();">
+        <button class="btn-back" 
+                onclick="window.location.href='http://localhost:8080/ASMPRJ2/home'">
             Quay lại
         </button>
         <h2>Danh sách đơn nghỉ phép</h2>
