@@ -80,7 +80,7 @@ public class DetailRequest extends HttpServlet {
 
         // Gọi DAO để lấy thông tin đơn theo id
         RequestDAO dao = new RequestDAO();
-        List<Request> req = dao.getReuestbyId(account.getEmployeeId());  // Bạn cần viết phương thức này trong RequestDAO
+        Request req = dao.getOneReuestbyId(id, account.getEmployeeId());     // Bạn cần viết phương thức này trong RequestDAO
 
         if (req == null) {
             // Nếu không tìm thấy đơn, quay về trang danh sách
