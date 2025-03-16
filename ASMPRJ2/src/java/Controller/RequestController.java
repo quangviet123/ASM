@@ -48,50 +48,7 @@ public class RequestController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         HttpSession session = request.getSession();
-    Account account = (Account) session.getAttribute("account");
-    if (account == null) {
-        response.sendRedirect("login");
-        return;
     }
-
-    String action = request.getParameter("action");
-    // Nếu action=edit, nghĩa là muốn sửa
-    if ("edit".equals(action)) {
-        // Lấy id
-        String idRaw = request.getParameter("id");
-        if (idRaw == null) {
-            // Không có id => Quay về trang danh sách
-            response.sendRedirect("home");
-            return;
-        }
-        int id = Integer.parseInt(idRaw);
-
-        // Lấy thông tin request từ DB
-        RequestDAO requestDAO = new RequestDAO();
-       List<Request> req = requestDAO.getReuestbyId(4);  // Viết hàm này trong DAO
-
-        if (req == null) {
-            // Không tìm thấy => Quay về trang danh sách
-            response.sendRedirect("home");
-            return;
-        }
-
-        // Đưa request này lên JSP để hiển thị form
-        request.setAttribute("editData", req);
-        request.setAttribute("isEdit", true); 
-        // isEdit=true để JSP biết đang sửa (chứ không phải tạo mới)
-
-        // Forward về Form.jsp
-        request.getRequestDispatcher("Form.jsp").forward(request, response);
-        return;
-    }
-
-    // Mặc định nếu không có action=edit, coi như hiển thị form rỗng (tạo mới)
-    // set isEdit = false => JSP biết hiển thị form tạo mới
-    request.setAttribute("isEdit", false);
-    request.getRequestDispatcher("Form.jsp").forward(request, response);
-}
     
 
     @Override
