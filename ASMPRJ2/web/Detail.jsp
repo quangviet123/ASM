@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Detail
-    Created on : Mar 15, 2025, 12:30:10 AM
-    Author     : ADMIN
---%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,32 +7,56 @@
         <title>Chi tiết đơn nghỉ</title>
         <style>
             body {
-                font-family: Arial, sans-serif;
-                background-color: #E6F5F5; 
+                font-family: 'Poppins', sans-serif;
+                background-color: #eef8f6;
                 padding: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
             }
             .container {
-                max-width: 400px;
-                margin: 0 auto;
-                background: #fff;
-                padding: 15px;
-                border-radius: 8px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                width: 400px;
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             }
             h2 {
                 text-align: center;
-                font-size: 18px;
-                margin-bottom: 15px;
+                font-size: 22px;
+                margin-bottom: 20px;
+                color: #007bff;
             }
             .field {
-                margin-bottom: 8px;
-                font-size: 14px;
+                margin-bottom: 15px;
+                font-size: 16px;
+                display: flex;
+                justify-content: space-between;
+                padding: 8px;
+                border-bottom: 1px solid #ddd;
+            }
+            /* Dành riêng cho field cần hiển thị nội dung nhiều dòng */
+            .field-multiline {
+                flex-direction: column;
+                align-items: flex-start;
             }
             .field label {
                 font-weight: bold;
+                color: #333;
             }
-            .field span {
-                margin-left: 8px;
+            .status-pending {
+                color: #e67e22;
+                font-weight: bold;
+            }
+            .status-rejected {
+                color: #e74c3c;
+                font-weight: bold;
+            }
+            .status-approved {
+                color: #2ecc71;
+                font-weight: bold;
             }
             .back-link {
                 text-align: center;
@@ -47,9 +66,12 @@
                 text-decoration: none;
                 color: white;
                 background: #007bff;
-                padding: 8px 15px;
+                padding: 10px 20px;
                 border-radius: 5px;
+                font-size: 16px;
+                font-weight: bold;
                 display: inline-block;
+                transition: background 0.3s ease;
             }
             .back-link a:hover {
                 background: #0056b3;
@@ -72,17 +94,27 @@
                     <label>Ngày tạo:</label>
                     <span>${detail.getDateCreate()}</span>
                 </div>
-                <div class="field">
+                <div class="field field-multiline">
                     <label>Lý do:</label>
-                    <span>${detail.getReaason()}</span>
+                    <span style="white-space: pre-wrap;">${detail.getReaason()}</span>
                 </div>
                 <div class="field">
                     <label>Trạng thái:</label>
-                    <span>${detail.getStatus()}</span>
+                    <c:choose>
+                        <c:when test="${detail.getStatus() eq 'Pending'}">
+                            <span class="status-pending">Pending</span>
+                        </c:when>
+                        <c:when test="${detail.getStatus() eq 'Rejected'}">
+                            <span class="status-rejected">Rejected</span>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="status-approved">${detail.getStatus()}</span>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </c:if>
             <c:if test="${empty detail}">
-                <p style="color: red; text-align: center; font-size: 14px;">Không tìm thấy đơn nghỉ phép.</p>
+                <p style="color: red; text-align: center; font-size: 16px;">Không tìm thấy đơn nghỉ phép.</p>
             </c:if>
             <div class="back-link">
                 <a href="View">Quay lại</a>
