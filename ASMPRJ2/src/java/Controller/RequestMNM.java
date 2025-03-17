@@ -60,23 +60,20 @@ public class RequestMNM extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int requestId = Integer.parseInt(request.getParameter("requestId"));
-        String action = request.getParameter("action");
-        RequestDAO dao = new RequestDAO();
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        if (account == null) {
+            response.sendRedirect("login");
+        } else if (account.getRoleId() == 3) {
+            request.getRequestDispatcher("Employee.jsp").forward(request, response);
 
-        if ("Approved".equalsIgnoreCase(action)) {
-            dao.UpdateStatusRequest("Aproved", requestId);
-        } else if ("Rejected".equalsIgnoreCase(action)) {
-            dao.UpdateStatusRequest("Rejected", requestId);
         }
-         HttpSession session = request.getSession();
-         int managementId = (Integer) session.getAttribute("managementId");
-        List<RequestDTO> requestList = dao.getRequestbyManagerID(managementId);
-        request.setAttribute("requestList", requestList);
-        request.getRequestDispatcher("ViewAdmin.jsp").forward(request, response);
-    }
+        RequestDAO dao = new RequestDAO();
+        List<RequestDTO> requestList = dao.getRequestbyManagerID(account.getEmployeeId());
+        request.setAttribute("requests", requestList);
+        request.getRequestDispatcher("ViewMNM.jsp").forward(request, response);
 
-    
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -89,7 +86,7 @@ public class RequestMNM extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**
