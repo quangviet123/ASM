@@ -14,19 +14,19 @@
                 padding: 0;
             }
             .container {
-                width: 90%;
+                width: 80%;
                 margin: auto;
-                padding-top: 20px;
+                padding-top: 15px;
             }
             .btn-back {
                 position: absolute;
-                top: 20px;
-                left: 20px;
+                top: 15px;
+                left: 15px;
                 background-color: #007bff;
                 color: white;
                 border: none;
-                padding: 10px 20px;
-                font-size: 16px;
+                padding: 8px 16px;
+                font-size: 14px;
                 font-weight: bold;
                 border-radius: 5px;
                 cursor: pointer;
@@ -37,8 +37,8 @@
             }
             table {
                 width: 100%;
-                max-width: 1000px;
-                margin: 20px auto;
+                max-width: 800px;
+                margin: 15px auto;
                 border-collapse: collapse;
                 border-radius: 10px;
                 overflow: hidden;
@@ -47,8 +47,9 @@
             }
             th, td {
                 border: 1px solid #ddd;
-                padding: 12px;
+                padding: 8px;
                 text-align: center;
+                font-size: 14px;
             }
             th {
                 background-color: #007bff;
