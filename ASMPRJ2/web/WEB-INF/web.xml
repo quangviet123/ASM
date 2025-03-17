@@ -28,6 +28,14 @@
         <servlet-name>RequestMNM</servlet-name>
         <servlet-class>Controller.RequestMNM</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteRequest</servlet-name>
+        <servlet-class>Controller.DeleteRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditRequest</servlet-name>
+        <servlet-class>Controller.EditRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControll</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -55,5 +63,13 @@
     <servlet-mapping>
         <servlet-name>RequestMNM</servlet-name>
         <url-pattern>/Management</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRequest</servlet-name>
+        <url-pattern>/Delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditRequest</servlet-name>
+        <url-pattern>/Edit</url-pattern>
     </servlet-mapping>
 </web-app>
