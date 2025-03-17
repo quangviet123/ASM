@@ -1,17 +1,11 @@
-<%-- 
-    Document   : View
-    Created on : Mar 8, 2025, 1:09:46 AM
-    Author     : ADMIN
---%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <style>
+        <title>Danh sách đơn nghỉ phép</title>
+        <style>
             body {
                 font-family: 'Poppins', sans-serif;
                 background-color: #eef8f6;
@@ -123,9 +117,9 @@
                                     </c:otherwise>
                                 </c:choose>
                             </td>
-                            <td>${request.getDateFrom()}</td>
-                            <td>${request.getDateTo()}</td>
-                            <td>${request.getDateCreate()}</td>
+                            <td style="white-space: nowrap;">${request.getDateFrom()}</td>
+                            <td style="white-space: nowrap;">${request.getDateTo()}</td>
+                            <td></td>
                             <td>
                                 <c:choose>
                                     <c:when test="${request.getStatus() eq 'Pending'}">
@@ -155,5 +149,3 @@
         </div>
     </body>
 </html>
-
-
