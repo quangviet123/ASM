@@ -17,24 +17,24 @@
                 margin: 0;
             }
             .container {
-                width: 400px;
+                width: 350px;
                 background: white;
-                padding: 20px;
+                padding: 15px;
                 border-radius: 10px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
             h2 {
                 text-align: center;
-                font-size: 22px;
-                margin-bottom: 20px;
+                font-size: 20px;
+                margin-bottom: 15px;
                 color: #007bff;
             }
             .field {
-                margin-bottom: 15px;
-                font-size: 16px;
+                margin-bottom: 10px;
+                font-size: 14px;
                 display: flex;
                 justify-content: space-between;
-                padding: 8px;
+                padding: 5px;
                 border-bottom: 1px solid #ddd;
             }
             /* Dành riêng cho field cần hiển thị nội dung nhiều dòng */
@@ -60,15 +60,15 @@
             }
             .back-link {
                 text-align: center;
-                margin-top: 20px;
+                margin-top: 15px;
             }
             .back-link a {
                 text-decoration: none;
                 color: white;
                 background: #007bff;
-                padding: 10px 20px;
+                padding: 8px 16px;
                 border-radius: 5px;
-                font-size: 16px;
+                font-size: 14px;
                 font-weight: bold;
                 display: inline-block;
                 transition: background 0.3s ease;
