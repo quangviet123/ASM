@@ -126,40 +126,23 @@ public class RequestDAO extends DBContext {
         }
         return list;
     }
-//    public static void main(String[] args) {
-//        RequestDAO requestDAO=new RequestDAO();
-//        List<RequestDTO> list=requestDAO.getRequestbyManagerID(2);
-//        for (RequestDTO request : list) {
-//            System.out.println(request.toString());
-//        }
-//            
-//    
-//    }
-
-    public List<RequestDTO> UpdateStatusRequest(String Status, int EmployeeId) {
-        List<RequestDTO> list = new ArrayList<>();
-        String sql = "update Request SET  Status = '?' where  EmployeeId = ?";
+    public static void main(String[] args) {
+        RequestDAO requestDAO=new RequestDAO();
+        List<RequestDTO> list=requestDAO.getRequestbyManagerID(1);
+        for (RequestDTO request : list) {
+            System.out.println(request.toString());
+        }
+    }
+    
+    public void  UpdateStatusRequest(String Status, int RequestId) {
+        String sql = "update Request SET  Status = ? where  Id = ?";
         try {
             PreparedStatement st = db.connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
             st.setString(1, Status);
-            st.setInt(2, EmployeeId);
-            while (rs.next()) {
-                RequestDTO r = new RequestDTO();
-                r.setId(rs.getInt(1));
-                r.setDateCreate(rs.getDate(2));
-                r.setDateFrom(rs.getDate(3));
-                r.setDateTo(rs.getDate(4));
-                r.setReason(rs.getString(5));
-                r.setStatus(rs.getString(6));
-                r.seteId(rs.getInt(7));
-                r.seteName(rs.getString(8));
-
-                list.add(r);
-            }
+            st.setInt(2, RequestId);
+            int rs = st.executeUpdate();
         } catch (SQLException ex) {
         }
-        return list;
     }
     public int  updateRequest(Request r) {
         int result = -1;
