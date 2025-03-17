@@ -64,10 +64,9 @@ public class RequestDAO extends DBContext {
         return result;
     }
 
-    public int Delete(int Id) {
+    public int DeleteById(int Id) {
         int result = -1;
-        String sql = "DELETE FROM [dbo].[Request]\n"
-                + "      WHERE ?";
+        String sql = "DELETE FROM Request WHERE Id = ?";
         try {
             PreparedStatement st = db.connection.prepareStatement(sql);
             st.setInt(1, Id);
@@ -164,14 +163,12 @@ public class RequestDAO extends DBContext {
     }
     public int  updateRequest(Request r) {
         int result = -1;
-        String sql = "UPDATE Request SET dateTo = ?, dateFrom = ?, dateCreate = ?, reaason = ?, status = ? WHERE id = ?";
+        String sql = "UPDATE Request SET DateTo = ?, dateFrom = ?, Reason = ? WHERE id = ?";
      try (PreparedStatement st = db.connection.prepareStatement(sql)) {
             st.setDate(1, r.getDateTo());
             st.setDate(2, r.getDateFrom());
-            st.setDate(3, r.getDateCreate());
-            st.setString(4, r.getReaason());
-            st.setString(5, r.getStatus()); // Nếu đổi tên thuộc tính, thì đây thành getReason()
-            st.setInt(6, r.getId());
+            st.setString(3, r.getReaason());
+            st.setInt(4, r.getId());
             result = st.executeUpdate();
         } catch (SQLException ex) {
             // Log lỗi để tiện debug
@@ -225,24 +222,24 @@ public class RequestDAO extends DBContext {
         }return list;
     }
 
-    public List<Request> getReuestbyId(int Id) {
-       List<Request> list = new ArrayList<>();
-        String sql = "select r.Id,r.DateCreate,r.DateFrom,r.DateTo,r.Reason,r.Status from Request r where r.EmployeeId=?";
+    public Request getReuestbyId(int Id) {
+        Request r=null;
+        String sql = "select r.Id,r.DateCreate,r.DateFrom,r.DateTo,r.Reason,r.Status from Request r where r.Id=?";
         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setInt(1, Id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Request r = new Request();
+                r = new Request();
                 r.setId(rs.getInt("Id"));
                 r.setDateTo(rs.getDate("DateTo"));
                 r.setDateFrom(rs.getDate("DateFrom"));
                 r.setDateCreate(rs.getDate("DateCreate"));
                 r.setReaason(rs.getString("Reaason"));
                 r.setStatus(rs.getString("Status"));
-                list.add(r);
             }
-        } catch (SQLException e) {
-        }return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }return r;
     }
     public Request getOneReuestbyId(int Id, int EmployeeId) {
         Request r = null;
