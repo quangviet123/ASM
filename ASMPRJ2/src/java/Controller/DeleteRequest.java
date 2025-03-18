@@ -54,10 +54,10 @@ public class DeleteRequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String idStr = request.getParameter("id");
-        if (idStr != null) {
+        String ID = request.getParameter("id");
+        if (ID != null) {
             try {
-                int id = Integer.parseInt(idStr);
+                int id = Integer.parseInt(ID);
                 RequestDAO requestDAO = new RequestDAO();
                 requestDAO.DeleteById(id);  // Phương thức delete cần được cài đặt trong DAO
             } catch (NumberFormatException e) {
