@@ -68,15 +68,15 @@ public class DetailRequest extends HttpServlet {
         }
 
         // Lấy tham số id trên URL: detail?id=xxx
-        String idRaw = request.getParameter("id");
-        System.out.println("Received id: " + idRaw);
-        if (idRaw == null || !idRaw.matches("\\d+")) {
+        String ID = request.getParameter("id");
+        System.out.println("Received id: " + ID);
+        if (ID == null || !ID.matches("\\d+")) {
             // Nếu không có id, chuyển về trang danh sách
             response.sendRedirect("home");
             return;
         }
 
-        int id = Integer.parseInt(idRaw);
+        int id = Integer.parseInt(ID);
 
         // Gọi DAO để lấy thông tin đơn theo id
         RequestDAO dao = new RequestDAO();
