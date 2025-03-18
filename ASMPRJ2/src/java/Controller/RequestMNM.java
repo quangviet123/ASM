@@ -86,6 +86,33 @@ public class RequestMNM extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        if (account == null) {
+            response.sendRedirect("login");
+            return;
+        }
+
+        // 2. Lấy tham số từ form
+        String action = request.getParameter("action");  // "Approve" hoặc "Reject"
+        String RequestId = request.getParameter("requestId");
+
+        // 3. Kiểm tra và xử lý
+        if (action != null && RequestId != null) {
+            int requestId = Integer.parseInt(RequestId);
+
+            // Gọi DAO cập nhật status
+            RequestDAO dao = new RequestDAO();
+            if ("Approve".equalsIgnoreCase(action)) {
+                dao.UpdateStatusRequest("Approved", requestId);
+            } else if ("Reject".equalsIgnoreCase(action)) {
+                dao.UpdateStatusRequest("Rejected", requestId);
+            }
+        }
+
+        // 4. Quay lại doGet để load danh sách mới
+        response.sendRedirect("Management");
+    
 
     }
 
