@@ -81,7 +81,7 @@ public class EditRequest extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
          try {
-       int id = Integer.parseInt(request.getParameter("id"));
+       int ID = Integer.parseInt(request.getParameter("id"));
         String reason = request.getParameter("reason");
         String dateFrom = request.getParameter("dateFrom");
         String dateTo = request.getParameter("dateTo");
@@ -90,7 +90,7 @@ public class EditRequest extends HttpServlet {
         // Các thông tin khác nếu có
 
         Request updatedRequest = new Request();
-        updatedRequest.setId(id);
+        updatedRequest.setId(ID);
         updatedRequest.setReaason(reason);
         updatedRequest.setDateFrom(Date.valueOf(dateFrom));
         updatedRequest.setDateTo(Date.valueOf(dateTo));
