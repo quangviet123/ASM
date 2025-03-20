@@ -126,13 +126,13 @@ public class RequestDAO extends DBContext {
         }
         return list;
     }
-    public static void main(String[] args) {
-        RequestDAO requestDAO=new RequestDAO();
-        List<RequestDTO> list=requestDAO.getRequestbyManagerID(1);
-        for (RequestDTO request : list) {
-            System.out.println(request.toString());
-        }
-    }
+//    public static void main(String[] args) {
+//        RequestDAO requestDAO=new RequestDAO();
+//        List<RequestDTO> list=requestDAO.getRequestbyManagerID(1);
+//        for (RequestDTO request : list) {
+//            System.out.println(request.toString());
+//        }
+//    }
     
     public void  UpdateStatusRequest(String Status, int RequestId) {
         String sql = "update Request SET  Status = ? where  Id = ?";
@@ -245,15 +245,28 @@ public class RequestDAO extends DBContext {
              e.printStackTrace();
         }return r;
     }
-//     public static void main(String[] args) {
-//        RequestDAO requestDAO=new RequestDAO();
-//        Request request=requestDAO.getOneReuestbyId(11, 4);
-//        for (Request request : re) {
-//            System.out.println(request.toString());
-//        }
+     public static void main(String[] args) {
+        RequestDAO requestDAO = new RequestDAO();
+        
+        // Giá trị test
+        int requestId = 2;    
+        int employeeId = 2;   
+        
+        // Gọi hàm getOneReuestbyId để lấy thông tin Request
+        Request request = requestDAO.getOneReuestbyId(requestId, employeeId);
+        if (request != null) {
+            System.out.println("Request ID: " + request.getId());
+            System.out.println("Date Create: " + request.getDateCreate());
+            System.out.println("Date From: " + request.getDateFrom());
+            System.out.println("Date To: " + request.getDateTo());
+            System.out.println("Reason: " + request.getReaason());
+            System.out.println("Status: " + request.getStatus());
+        } else {
+            System.out.println("Không tìm thấy request với id " + requestId + " và employeeId " + employeeId);
+        }
             
     
-    }
+    }}
 
 
    

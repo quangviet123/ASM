@@ -137,14 +137,14 @@
             <td>
                 <!-- Form Approve -->
                 <form action="Management" method="post" style="display: inline;">
-                    <input type="hidden" name="requestId" value="${req.getId()}"/>
-                    <input type="submit" name="action" value="Approve"
+                    <input type="hidden" name="Id" value="${req.getId()}"/>
+                    <input type="submit" name="status" value="Approve"
                            class="action-button approve" />
                 </form>
                 <!-- Form Reject -->
                 <form action="Management" method="post" style="display: inline;">
-                    <input type="hidden" name="requestId" value="${req.getId()}"/>
-                    <input type="submit" name="action" value="Reject"
+                    <input type="hidden" name="Id" value="${req.getId()}"/>
+                    <input type="submit" name="status" value="Reject"
                            class="action-button reject" />
                 </form>
             </td>

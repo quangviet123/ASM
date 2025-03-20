@@ -119,7 +119,7 @@
                         <th>Title</th>
                         <th>From</th>
                         <th>To</th>
-                        <th>Created By</th>
+                        <th>DateCreate</th>
                         <th>Status</th>
                         <th>Update</th>
                     </tr>
@@ -141,7 +141,7 @@
                             </td>
                             <td style="white-space: nowrap;">${request.getDateFrom()}</td>
                             <td style="white-space: nowrap;">${request.getDateTo()}</td>
-                            <td></td>
+                            <td style="white-space: nowrap;">${request.getDateCreate()}</td>
                             <td>
                                 <c:choose>
                                     <c:when test="${request.getStatus() eq 'Pending'}">
@@ -158,7 +158,7 @@
                             <td>
                                 <c:if test="${request.getStatus() eq 'Pending'}">
                                     <div class="action-buttons">
-                                        <a href="${pageContext.request.contextPath}/Edit?id=${request.getId()}">Edit</a>
+                                        <a href="${pageContext.request.contextPath}/Edit?Id=${request.getId()}">Edit</a>
                                         <span>|</span>
                                         <a href="${pageContext.request.contextPath}/Delete?id=${request.getId()}" 
                                            onclick="return confirm('Bạn có chắc chắn muốn xóa đơn này?');">

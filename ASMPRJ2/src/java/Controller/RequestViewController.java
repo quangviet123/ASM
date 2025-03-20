@@ -60,10 +60,6 @@ public class RequestViewController extends HttpServlet {
     throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("account");
-        if (account == null) {
-            response.sendRedirect("login");
-            return;
-        }
 
         // Gọi DAO lấy danh sách đơn
         RequestDAO requestdao=new RequestDAO();

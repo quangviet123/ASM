@@ -88,25 +88,21 @@ public class RequestMNM extends HttpServlet {
             throws ServletException, IOException {
          HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("account");
-        if (account == null) {
-            response.sendRedirect("login");
-            return;
-        }
 
         // 2. Lấy tham số từ form
-        String action = request.getParameter("action");  // "Approve" hoặc "Reject"
-        String RequestId = request.getParameter("requestId");
+        String sst = request.getParameter("status");  // "Approve" hoặc "Reject"
+        String Id = request.getParameter("Id");
 
         // 3. Kiểm tra và xử lý
-        if (action != null && RequestId != null) {
-            int requestId = Integer.parseInt(RequestId);
+        if (sst != null && Id != null) {
+            int id = Integer.parseInt(Id);
 
             // Gọi DAO cập nhật status
             RequestDAO dao = new RequestDAO();
-            if ("Approve".equalsIgnoreCase(action)) {
-                dao.UpdateStatusRequest("Approved", requestId);
-            } else if ("Reject".equalsIgnoreCase(action)) {
-                dao.UpdateStatusRequest("Rejected", requestId);
+            if ("Approve".equalsIgnoreCase(sst)) {
+                dao.UpdateStatusRequest("Approved", id);
+            } else if ("Reject".equalsIgnoreCase(sst)) {
+                dao.UpdateStatusRequest("Rejected", id);
             }
         }
 
