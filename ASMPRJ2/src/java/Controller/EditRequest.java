@@ -57,9 +57,9 @@ public class EditRequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String idStr = request.getParameter("id");
-        if(idStr != null){
-            int id = Integer.parseInt(idStr);
+         String Id = request.getParameter("Id");
+        if(Id != null){
+            int id = Integer.parseInt(Id);
             RequestDAO requestDAO = new RequestDAO();
             Request req = requestDAO.getReuestbyId(id); // Phương thức này cần có trong DAO
             request.setAttribute("request", req);
